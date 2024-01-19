@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f4;
+
+}
+
+.breadcrumbs ul {
+    list-style: none;
+    padding: 10px;
+    background-color: #65dae5;
+}
+
+.breadcrumbs ul li {
+    display: inline;
+    margin-right: 5px;
+}
+
+.Product-title {
+    text-align: center;
+    margin-top: 20px;
+    color: cadetblue;
+}
+
+.product-image img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.product-options {
+    text-align: center;
+    margin-top: 2opx;
+}
+
+.size-options {
+    margin-bottom: 10px;
+}
+
+.size-options button {
+    background-color: blue;
+    color: aliceblue;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.quantity {
+    margin-bottom: 10px;
+}
+
+.quantity select {
+    padding: 5px;
+}
+
+.price {
+    font-size: 1.2em;
+}
+
+.add-to-bag {
+    background-color: aqua;
+    color: rgb(11, 9, 9);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.product-description,
+.delivery-options,
+.customer-review {
+    margin: 20px auto;
+    width: 80%;
+}
+
+.delivery-options {
+    border-collapse: collapse;
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+
+.delivery-options,
+.delivery-options th,
+.delivery-options td {
+    border: 1px solid black;
+}
+
+
+.customer-review {
+    background-color: #eeeeee;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.customer-review h3 {
+    margin-top: 0;
+}

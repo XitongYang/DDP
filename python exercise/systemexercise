@@ -1,0 +1,125 @@
+# Product Database using dictionaries
+product_database = {
+    'apple': {'price': 10.0, 'sales': 0, 'ratings': []},
+    'banana': {'price': 20.0, 'sales': 0, 'ratings': []},
+    'orange': {'price': 15.0, 'sales': 0, 'ratings': []}
+}
+
+
+# Sales history
+sales_history = {}
+
+# Customer feedback
+customer_feedback = {}
+
+# Sales Tracking Functions
+def record_sales_transaction(product_name, quantity):
+    if product_name in product_database:
+        product_database[product_name]['sales'] += quantity
+        if product_name not in sales_history:
+            sales_history[product_name] = []
+        sales_history[product_name].append(quantity)
+    else:
+        print("Product not found in the database.")
+
+def calculate_total_sales(product_name):
+    if product_name in product_database:
+        return product_database[product_name]['sales']
+    else:
+        print("Product not found in the database.")
+        return 0
+
+def identify_best_selling_product():
+    best_product = max(product_database, key=lambda x: product_database[x]['sales'])
+    return best_product
+
+# Customer Management Functions
+def record_customer_feedback(product_name, rating):
+    min_rating, max_rating = 1.0, 5.0
+
+    if product_name in product_database:
+        if min_rating <= rating <= max_rating:
+            product_database[product_name]['ratings'].append(rating)
+        else:
+            print(f"Invalid rating. Please enter a rating between {min_rating} and {max_rating}.")
+    else:
+        print("Product not found in the database.")
+
+
+def display_product_average_rating(product_name):
+    if product_name in customer_feedback:
+        ratings = customer_feedback[product_name]
+        avg_rating = sum(ratings) / len(ratings)
+        return avg_rating
+    else:
+        print("No feedback available for this product.")
+        return 0.0
+
+def generate_sales_report():
+    total_revenue = 0
+    best_selling_product = identify_best_selling_product()
+    print(f"Best-selling product: {best_selling_product}")
+
+    print("Product Sales History:")
+    for product, sales in sales_history.items():
+        total_sales = sum(sales)
+        product_price = product_database[product]['price']
+        revenue = total_sales * product_price
+        total_revenue += revenue
+        print(f"{product}: Total Sales - {total_sales}, Total Revenue - {revenue}")
+
+    print(f"Total Revenue: {total_revenue}")
+
+
+# User Interface
+def main_menu():
+    print("Product Sales Analysis System")
+    print("1. Record Sales Transaction")
+    print("2. Calculate Total Sales")
+    print("3. Identify Best-Selling Product")
+    print("4. Record Customer Feedback")
+    print("5. Display Product Average Rating")
+    print("6. Generate Sales Report")
+    print("7. Exit")
+    choice = input("Enter your choice: ")
+    if choice == '1':
+        product_name = input("Enter product name: ")
+        quantity = int(input("Enter quantity sold: "))
+        record_sales_transaction(product_name, quantity)
+    elif choice == '2':
+        product_name = input("Enter product name: ")
+        total_sales = calculate_total_sales(product_name)
+        print(f"Total sales for {product_name}: {total_sales}")
+    elif choice == '3':
+        best_product = identify_best_selling_product()
+        print(f"Best-selling product: {best_product}")
+    elif choice == '4':
+        product_name = input("Enter product name: ")
+        
+        while True:
+            try:
+                rating = float(input("Enter customer rating (1.0-5.0): "))
+                if 1.0 <= rating <= 5.0:
+                    record_customer_feedback(product_name, rating)
+                    break
+                else:
+                    print("Invalid rating. Please enter a rating between 1.0 and 5.0.")
+            except ValueError:
+                print("Invalid input. Please enter a numerical value for the rating.")
+    elif choice == '5':
+        product_name = input("Enter product name: ")
+        avg_rating = display_product_average_rating(product_name)
+        print(f"Average rating for {product_name}: {avg_rating}")
+    elif choice == '6':
+        generate_sales_report()
+    elif choice == '7':
+        exit()
+    else:
+        print("Invalid choice. Please select a valid option.")
+
+# Error Handling (You can add more specific error handling as needed)
+
+# Main program loop
+if __name__ == "__main__":
+    while True:
+        main_menu()

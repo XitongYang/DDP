@@ -1,0 +1,26 @@
+// Assuming we have a button on the website with an ID 'bookButton'
+
+1. Locate the 'Book' button on the website
+   button = findElementById('bookButton')
+
+2. Define the URL or integration point for the third-party ordering system
+   thirdPartyURL = 'https://third-party-ordering.com/book-now'
+
+3. Add an event listener to the 'Book' button for the 'click' event
+   button.addEventListener('click', function() {
+
+4. On clicking the 'Book' button, redirect the user to the third-party system
+      redirectTo(thirdPartyURL)
+   })
+
+// Function to redirect user to a specified URL
+function redirectTo(url) {
+   window.location.href = url
+}
+
+// Optionally, if the third-party system supports it, you might pass additional parameters in the URL
+// For example, if you can pre-fill the booking form with the date, time, or service type, you might construct the URL as follows:
+// thirdPartyURL = 'https://third-party-ordering.com/book-now?date=2024-02-02&service=ServiceType'
+
+// Remember to replace 'https://third-party-ordering.com/book-now' with the actual URL provided by the third-party system
+// And modify parameters (e.g., 'date', 'service') according to the third-party system's requirements

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Warwick Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #fbf3fd;
+            color: #000000;
+        }
+
+        .sub-title {
+            background-color: #724489;
+            font-size: 1.5em;
+            color: rgb(250, 250, 250);
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-top: 0.5em;
+        }
+
+        .navbar-logo {
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .navbar-toggler {
+            border-color: #ffffff;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .book-button {
+            background-color: white;
+            color: #3D1053;
+            border: none;
+        }
+
+        .book-button:hover {
+            background-color: #ffde05;
+        }
+
+
+        .btn-outline-success {
+            color: #fff;
+            background-color: #3D1053;
+            border-color: #ffffff;
+        }
+
+        .btn-outline-success:hover {
+            color: #3D1053;
+            background-color: #ffde05;
+            border-color: #ffde05;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" style="background-color: #3D1053 !important;">
+            <div class="container-fluid">
+                <a href="./images/navlogo.png">
+                    <img src="./images/navlogo.png" alt="navlogo" class="navbar-logo">
+                </a>
+                <a class="navbar-brand" href="#" style="color: #ffffff;">Warwick Restaurant</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./index.html"
+                                style="color: #ffffff;">Home</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                Dietary Assistant
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./search.html">Food Allergy Search</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Special Diet Search</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="./Calculator">Calorie Calculator</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Dish Details Search</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                Health & Wellness
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Health diet stategy</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Special diet information</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: #ffffff;">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: #ffffff;">Offers</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                About us
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Team infomation</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">ESG</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Contact us</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./images/restaurant1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/restaurant2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/restaurant3.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/restaurant5.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/restaurant6.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <article class="mx-5">
+
+            <h1>Welcome to Warwick's Restaurant!</h1>
+            <p class="sub-title">
+                Your Health, Our Care! 🌟 At Warwick, we focus on your safety, especially with food allergies. Not sure
+                about allergies? Check our
+                <a href="health guide.html" style="color: #ffde05;">easy-to-follow health guide. </a> Our supportive <a
+                    href="./contact.html" style="color: #ffde05;">food team</a> is here to help you eat safely and stay
+                healthy!
+            </p>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Warwick's restaurant</h2>
+                        </div>
+                        <img src="./images/Benugo Bar and Kitchen.png" class="card-img-top"
+                            alt="Benugo Bar and Kitchen">
+                        <div class="card-body">
+                            <h4 class="card-text" style="color: #CD7F32;">Benugo Bar and Kitchen</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">📍: Warwick Arts Centre</li>
+                                <li class="list-group-item"><b>Open time:</b> 10:00-19:00</li>
+                                <li class="list-group-item"><b>Ratings:</b> ⭐️⭐️⭐️⭐️⭐️</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Warwick's restaurant</h2>
+                        </div>
+                        <img src="./images/Cafe Library.png" class="card-img-top" alt="Cafe Library">
+                        <div class="card-body">
+                            <h4 class="card-text" style="color: rgb(239, 92, 92);">Cafe Library</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">📍: Library</li>
+                                <li class="list-group-item"><b>Open time:</b> 8:00-21:00</li>
+                                <li class="list-group-item"><b>Ratings:</b> ⭐️⭐️⭐️⭐️</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Warwick's restaurant</h2>
+                        </div>
+                        <img src="./images/Fusion Sports Bar.png" class="card-img-top" alt="Fusion Sports Bar">
+                        <div class="card-body">
+                            <h4 class="card-text" style="color: rgb(187, 0, 255);">Fusion Sports Bar</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">📍: Rootes Building</li>
+                                <li class="list-group-item"><b>Open time:</b> 15:00-23:00</li>
+                                <li class="list-group-item"><b>Rating:</b> ⭐️⭐️⭐️⭐️</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Warwick's restaurant</h2>
+                        </div>
+                        <img src="./images/Jidong.png" class="card-img-top" alt="Jidong">
+                        <div class="card-body">
+                            <h4 class="card-text" style="color: rgb(255, 0, 162);">Jidong</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">📍: Ground floor, Students' Union Building (South)</li>
+                                <li class="list-group-item"><b>Open time:</b> 10:00-18:00</li>
+                                <li class="list-group-item"><b>Ratings:</b> ⭐️⭐️⭐️⭐️⭐️</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <div class="mt-4 p-5  text-white text-center " style="background-color:#724489;">
+        <h1>Time For Eating!</h1>
+        <button class="btn book-button my-4" style="color: #3D1053;">Book Now</button>
+    </div>
+
+    <footer class="text-center text-white" style="background-color: #3D1053;">
+        © 2024 Warwick Restaurant
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

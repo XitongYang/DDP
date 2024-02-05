@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dish Search</title>
+    <script>
+        async function searchDishes() {
+            const allergen = document.getElementById('allergen').value;
+            const response = await fetch('http://127.0.0.1:8000/search_dishes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ allergen: allergen })
+            });
+            const data = await response.json();
+            document.getElementById('results').innerText = JSON.stringify(data.dishes, null, 2);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Dish Search</h1>
+    <input type="text" id="allergen" placeholder="Enter allergen">
+    <button onclick="searchDishes()">Search</button>
+    <pre id="results"></pre>
+</body>
+
+</html>

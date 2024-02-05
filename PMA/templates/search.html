@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Safe Dining</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #fbf3fd;
+            color: #000000;
+
+        }
+
+        .sub-title {
+            background-color: #724489;
+            font-size: 1.5em;
+            color: rgb(250, 250, 250);
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-top: 0.5em;
+        }
+
+        .navbar-logo {
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .navbar-toggler {
+            border-color: #ffffff;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .book-button {
+            background-color: white;
+            color: #3D1053;
+            border: none;
+        }
+
+        .book-button:hover {
+            background-color: #ffde05;
+        }
+
+
+        .btn-outline-success {
+            color: #fff;
+            background-color: #3D1053;
+            border-color: #ffffff;
+        }
+
+        .btn-outline-success:hover {
+            color: #3D1053;
+            background-color: #ffde05;
+            border-color: #ffde05;
+        }
+
+        .btn-outline-success:active {
+            background-color: #ffa805 !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        #results {
+            position: relative;
+            /* 或者 'absolute', 取决于布局需求 */
+            z-index: 10;
+            /* 确保它在其他元素之上 */
+            background-color: rgba(255, 255, 255, 0.8);
+            /* 半透明白色背景 */
+            color: #000000;
+            margin-top: px;
+            /* 或根据需要调整 */
+            padding: 20px;
+            width: 80%;
+            /* 或根据需要调整 */
+            max-height: 300px;
+            /* 或根据需要调整 */
+            overflow: auto;
+            /* 添加滚动条 */
+            border-radius: 7px;
+        }
+    </style>
+
+    <script>
+        // JavaScript 
+        function searchDishes(event) {
+            event.preventDefault();
+
+            var allergenInput = document.getElementById('allergenInput');
+            var allergen = allergenInput.value;
+
+            fetch('http://127.0.0.1:5000/search_dishes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ allergen: allergen }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var results = document.getElementById('results');
+                    results.innerHTML = '<ul>';
+                    data.dishes.forEach(dish => {
+                        results.innerHTML += '<li>' + dish[0] + ': ' + dish[1] + '</li>';
+                    });
+                    results.innerHTML += '</ul>';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" style="background-color: #3D1053 !important;">
+            <div class="container-fluid">
+                <a href="./images/navlogo.png">
+                    <img src="./images/navlogo.png" alt="navlogo" class="navbar-logo">
+                </a>
+                <a class="navbar-brand" href="#" style="color: #ffffff;">Warwick Restaurant</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./index.html"
+                                style="color: #ffffff;">Home</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                Dietary Assistant
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./search.html">Food Allergy Search</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Special Diet Search</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="./Calculator">Calorie Calculator</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Dish Details Search</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                Health & Wellness
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Health diet stategy</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Special diet information</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: #ffffff;">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: #ffffff;">Offers</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                About us
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Team infomation</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">ESG</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Contact us</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main
+        style="padding-top: 80px; padding-bottom: 50px; background-image:url(./images/searchbg.jpg) ; background-size: cover; background-position: center;">
+        <div style="padding-left: 20px; padding-right: 20px;">
+            <h1 style="color: #ffffff; margin-bottom: 20px">Safe Dining </h1>
+            <h5 style="color: #ffffff; margin-bottom: 30px">
+                We care about your health. Share your allergens with us, and we'll provide the safest dining options for
+                you.
+            </h5>
+            <form class="d-flex justify-content-center my-2" onsubmit="searchDishes(event)">
+                <input class="form-control me-2" type="search" id="allergenInput"
+                    placeholder="Enter allergens, e.g., Nuts, Dairy, Shellfish..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div id="results"></div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

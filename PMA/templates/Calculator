@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #fbf3fd;
+            color: #000000;
+
+        }
+
+        .navbar-logo {
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .navbar-toggler {
+            border-color: #ffffff;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .btn-primary {
+            background-color: #f60077;
+            color: #fff;
+            border-color: #ffffff;
+            padding: 8px 13px;
+            /* Padding around text */
+        }
+
+        .btn-primary:hover {
+            color: #3D1053;
+            background-color: #ffde05;
+            border-color: #ffde05;
+        }
+
+        .btn-primary:active {
+            background-color: #ffa805 !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        .btn-success {
+            background-color: #3D1053;
+            color: #fff;
+            border-color: #ffffff;
+        }
+
+        .btn-success:hover {
+            color: #3D1053;
+            background-color: #ffde05;
+            border-color: #ffde05;
+        }
+
+        .btn-success:active {
+            background-color: #ffa805 !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        .btn-outline-success {
+            color: #fff;
+            background-color: #3D1053;
+            border-color: #ffffff;
+        }
+
+        .btn-outline-success:hover {
+            color: #3D1053;
+            background-color: #ffde05;
+            border-color: #ffde05;
+        }
+
+        .btn-outline-success:active {
+            background-color: #ffa805 !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+    </style>
+    <script>
+        let dishesData = [];  // 用于存储从后端获取的菜品数据
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('http://127.0.0.1:5000/get-food-categories').then(response => response.json()).then(data => {
+                dishesData = data;
+                const select = document.getElementById('foodCategory');
+                data.forEach(dish => {
+                    select.options[select.options.length] = new Option(dish.name, dish.id);
+                });
+            });
+
+            document.getElementById('foodForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const selectedDishId = document.getElementById('foodCategory').value;
+                const amount = document.getElementById('foodAmount').value;
+                const selectedDish = dishesData.find(dish => dish.id == selectedDishId);
+
+                if (selectedDish && amount) {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('list-group-item');
+                    listItem.textContent = `${selectedDish.name}, Servings: ${amount}, Calories: ${selectedDish.calories * amount}`;
+                    document.getElementById('foodList').appendChild(listItem);
+                }
+            });
+
+            document.getElementById('calculateBtn').addEventListener('click', function () {
+                const listItems = document.querySelectorAll('#foodList .list-group-item');
+                let totalCalories = 0;
+                listItems.forEach(item => {
+                    const calories = parseInt(item.textContent.split(', Calories: ')[1]);
+                    totalCalories += calories;
+                });
+                document.getElementById('totalCalories').textContent = totalCalories;
+            });
+        });
+    </script>
+</head>
+
+
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" style="background-color: #3D1053 !important;">
+            <div class="container-fluid">
+                <a href="./images/navlogo.png">
+                    <img src="./images/navlogo.png" alt="navlogo" class="navbar-logo">
+                </a>
+                <a class="navbar-brand" href="#" style="color: #ffffff;">Warwick Restaurant</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./index.html"
+                                style="color: #ffffff;">Home</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                Dietary Assistant
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./search.html">Food Allergy Search</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Special Diet Search</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="./Calculator">Calorie Calculator</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Dish Details Search</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                Health & Wellness
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Health diet stategy</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Special diet information</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: #ffffff;">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: #ffffff;">Offers</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: #ffffff;">
+                                About us
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Team infomation</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">ESG</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Contact us</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container my-4" style="padding-top: 70px;">
+        <div class="row">
+            <!-- Input Area -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Food</h5>
+                        <form id="foodForm">
+                            <div class="mb-3">
+                                <label for="foodCategory" class="form-label">Food Category</label>
+                                <select class="form-control" id="foodCategory">
+                                    <!-- Options will be populated from database -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="foodAmount" class="form-label">Food Amount (servings)</label>
+                                <input type="number" class="form-control" id="foodAmount" placeholder="Enter servings">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List Display Area -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Food List</h5>
+                        <ul id="foodList" class="list-group list-group-flush">
+                            <!-- Food items will be dynamically added here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculation Result Area -->
+        <div class="row my-4">
+            <div class="col-12">
+                <button id="calculateBtn" class="btn btn-success">Calculate Total Calories</button>
+                <div class="mt-3">
+                    <h4>Total Calories: <span id="totalCalories">0</span> Cal</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
